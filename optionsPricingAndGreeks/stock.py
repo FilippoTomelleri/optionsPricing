@@ -1,8 +1,8 @@
 import yfinance as yf
-from option import Option
-from utilities.interval import Interval
-from utilities.optionType import OptionType
-from utilities.period import Period
+from optionsPricingAndGreeks.option import Option
+from optionsPricingAndGreeks.utilities.interval import Interval
+from optionsPricingAndGreeks.utilities.optionType import OptionType
+from optionsPricingAndGreeks.utilities.period import Period
 import pandas as pd
 from datetime import datetime
 

@@ -1,10 +1,10 @@
 import datetime
-from option import Option
-from stock import Stock
-from utilities.optionType import OptionType
-from utilities.period import Period
-from utilities.returnsCalculator import ReturnsCalculator
-from estimator._estimator import Estimator
+from optionsPricingAndGreeks.option import Option
+from optionsPricingAndGreeks.stock import Stock
+from optionsPricingAndGreeks.utilities.optionType import OptionType
+from optionsPricingAndGreeks.utilities.period import Period
+from optionsPricingAndGreeks.utilities.returnsCalculator import ReturnsCalculator
+from optionsPricingAndGreeks.estimator._estimator import Estimator
 import scipy.stats as scipy
 import numpy as np
 

@@ -1,9 +1,9 @@
 import math
-from estimator._estimator import Estimator
-from option import Option
-from utilities.optionType import OptionType
-from utilities.period import Period
-from utilities.returnsCalculator import ReturnsCalculator
+from optionsPricingAndGreeks.estimator._estimator import Estimator
+from optionsPricingAndGreeks.option import Option
+from optionsPricingAndGreeks.utilities.optionType import OptionType
+from optionsPricingAndGreeks.utilities.period import Period
+from optionsPricingAndGreeks.utilities.returnsCalculator import ReturnsCalculator
 import datetime
 import scipy.stats as scipy
 

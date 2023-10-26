@@ -1,4 +1,4 @@
-from utilities.optionType import OptionType
+from optionsPricingAndGreeks.utilities.optionType import OptionType
 from datetime import datetime
 
 class Option:

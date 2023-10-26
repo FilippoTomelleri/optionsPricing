@@ -1,9 +1,9 @@
 import math
-from estimator._estimator import Estimator
-from option import Option
-from stock import Stock
-from utilities.period import Period
-from utilities.returnsCalculator import ReturnsCalculator
+from optionsPricingAndGreeks.estimator._estimator import Estimator
+from optionsPricingAndGreeks.option import Option
+from optionsPricingAndGreeks.stock import Stock
+from optionsPricingAndGreeks.utilities.period import Period
+from optionsPricingAndGreeks.utilities.returnsCalculator import ReturnsCalculator
 import numpy.random as nprnd
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -11,7 +11,7 @@ import datetime
 import numpy as np
 
 
-class BootstrapEstimator(Estimator):
+class MonteCarloEstimator(Estimator):
 
     def __init__(self, stock: Stock) -> None:
         super().__init__(stock)
@@ -25,7 +25,7 @@ class BootstrapEstimator(Estimator):
         deltaT = (option.expirationDate - datetime.datetime.today()).days
 
         returnsCalculator = ReturnsCalculator(prices)
-        returns = returnsCalculator.returns
+        sigma = returnsCalculator.dailyVolatilityPercentage
 
         #daily interest rate
         r = (annuallyInterestRate or self.annuallyInterestRate) / 365
@@ -40,11 +40,11 @@ class BootstrapEstimator(Estimator):
             simulation = np.array([price])
             
             for _ in range(0, deltaT):
-                #add a random past return to the current price
-                randomIndex = rng.uniform(0, len(returns))
-                price += returns[int(randomIndex)]
-                
+                x = rng.normal(returnsCalculator.dailyDriftPercentage, sigma)
+                #brownian motion
+                price = price * math.e ** ((r - 0.5 * sigma**2) + sigma * x)
                 simulation = np.append(simulation, price)
+                
 
             allSimulationsFinalPrice = np.append(allSimulationsFinalPrice, price)
 
@@ -63,7 +63,7 @@ class BootstrapEstimator(Estimator):
         tot = sum([option.calculatePayoff(finalPrice) * (math.e ** -(r * deltaT)) for finalPrice in allSimulationsFinalPrice ])
 
         #average
-        return tot / len(allSimulationsFinalPrice)
+        return tot / (len(allSimulationsFinalPrice) -1)
     
     @property
     def simulationPaths(self):

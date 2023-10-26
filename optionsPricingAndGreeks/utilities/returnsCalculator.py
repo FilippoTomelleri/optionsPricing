@@ -19,4 +19,3 @@ class ReturnsCalculator:
 if __name__ == "__main__":
     import yfinance as yf
     x = yf.Ticker("AAPL").history()
-    print(ReturnsCalculator(x).dailyDriftPercentage)

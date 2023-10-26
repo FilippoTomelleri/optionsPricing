@@ -1,8 +1,8 @@
-from estimator._estimator import Estimator
+from optionsPricingAndGreeks.estimator._estimator import Estimator
 import math
-from utilities.period import Period
-from utilities.returnsCalculator import ReturnsCalculator
-from option import Option
+from optionsPricingAndGreeks.utilities.period import Period
+from optionsPricingAndGreeks.utilities.returnsCalculator import ReturnsCalculator
+from optionsPricingAndGreeks.option import Option
 import datetime
 import numpy as np
 
@@ -68,8 +68,6 @@ class BinomialEstimator(Estimator):
 
         u =  1 + sigma
         d =  1 - sigma
-
-        print(sigma)
 
         #p' = 0.5 + (r * sqrt(deltaT) / 2 sigma)
         riskNeutralProbability = 0.5 + (r * (math.sqrt(deltaT))) / (2*sigma)
